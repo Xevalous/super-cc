@@ -147,6 +147,10 @@ By using this software, you acknowledge that:
 
 **Use at your own risk.**
 
+## Credit
+
+Version download URLs and DLL pattern references sourced from [CapCut Project](https://iosgods.com/topic/190383-capcut-pro-crack-pc-open-source/).
+
 ## License
 
 MIT License — see [LICENSE](LICENSE) for details.
