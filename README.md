@@ -129,10 +129,8 @@ All tests run on Linux/macOS CI (Windows-specific commands are tested with expec
 ## Tech Stack
 
 - **Backend**: Go 1.21+
-- **Frontend**: Vanilla JS, CSS (macOS 26 Tahoe design system)
-- **Icons**: Phosphor Icons (bundled woff2)
+- **Frontend**: Vanilla JS, CSS
 - **Desktop**: Wails v2 with WebView2
-- **Design**: Glassmorphism, 0.5px hairline borders, backdrop-filter blur
 
 ## Disclaimer
 
