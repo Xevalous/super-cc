@@ -1,6 +1,5 @@
 /**
  * Super CC - Main Controller
- * macOS 26 Tahoe Design System
  */
 
 // ============================================
