@@ -1,0 +1,18 @@
+{
+  "name": "Super CC",
+  "outputfilename": "Super CC",
+  "frontend": {
+    "install": "",
+    "build": "",
+    "dev": "",
+    "dir": "frontend"
+  },
+  "version": "2",
+  "outputType": "desktop",
+  "build": {
+    "command": "go build -o build/bin/SuperCC.exe",
+    "windows": {
+      "webview2": true
+    }
+  }
+}

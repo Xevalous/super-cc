@@ -1,0 +1,6 @@
+references/
+.agents/
+.worktrees/
+docs/
+skills-lock.json
+build/

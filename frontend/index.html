@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super CC</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="fonts/phosphor-regular.css">
+</head>
+<body class="tahoe-window">
+    <div id="app">
+        <!-- SIDEBAR -->
+        <nav class="sidebar">
+            <div class="sidebar-brand">
+                <i class="ph ph-sparkle"></i>
+                <span>Super CC</span>
+            </div>
+            <div class="sidebar-section-label">Management</div>
+            <ul class="nav-menu">
+                <li>
+                    <a href="#" class="nav-link active" data-page="dashboard">
+                        <i class="ph ph-squares-four"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-page="download">
+                        <i class="ph ph-download-simple"></i>
+                        <span>Download</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-page="lock">
+                        <i class="ph ph-lock"></i>
+                        <span>Lock</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-section-label">Tools</div>
+            <ul class="nav-menu">
+                <li>
+                    <a href="#" class="nav-link" data-page="crack">
+                        <i class="ph ph-magic-wand"></i>
+                        <span>Activate</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-page="cleanup">
+                        <i class="ph ph-broom"></i>
+                        <span>Cleanup</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link" data-page="debug">
+                        <i class="ph ph-bug"></i>
+                        <span>Debug</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="https://github.com/Xevalous/super-cc" target="_blank" rel="noopener" class="sidebar-footer-link" title="GitHub Repository">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="content">
+
+            <!-- PAGE: DASHBOARD -->
+            <div id="page-dashboard" class="page active">
+                <div class="page-header">
+                    <h1>Dashboard</h1>
+                    <p class="page-subtitle">Installation overview</p>
+                </div>
+
+                <!-- Status Card -->
+                <div class="glass-panel status-card-main">
+                    <div class="status-icon-wrapper" id="status-icon-wrapper">
+                        <i class="ph ph-circle-notch spin" id="status-icon-main"></i>
+                    </div>
+                    <div class="status-content">
+                        <span class="status-title" id="app-status">Checking...</span>
+                        <span class="status-subtitle" id="app-status-detail">Scanning system</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Version Card -->
+                    <div class="glass-panel dashboard-info-card">
+                        <div class="card-icon bg-accent-blue">
+                            <i class="ph ph-tag"></i>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-label">Version</span>
+                            <span class="card-value" id="app-version">-</span>
+                        </div>
+                    </div>
+
+                    <!-- Size Card -->
+                    <div class="glass-panel dashboard-info-card">
+                        <div class="card-icon bg-accent-green">
+                            <i class="ph ph-hard-drives"></i>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-label">Size</span>
+                            <span class="card-value" id="app-size">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Installation Details -->
+                <div class="glass-panel detail-panel">
+                    <h3 class="panel-title">
+                        <i class="ph ph-info"></i>
+                        Installation Details
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Path</span>
+                            <span class="info-value mono" id="app-path">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button class="btn-primary" onclick="navigateTo('download')">
+                        <i class="ph ph-download-simple"></i>
+                        Download Supported Version
+                    </button>
+                    <button class="btn-secondary" onclick="navigateTo('lock')">
+                        <i class="ph ph-lock"></i>
+                        Lock Version
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAGE: DOWNLOAD -->
+            <div id="page-download" class="page">
+                <div class="page-header">
+                    <h1>Download</h1>
+                    <p class="page-subtitle">Browse and download supported versions</p>
+                </div>
+
+                <!-- Search & Filter -->
+                <div class="search-filter-container">
+                    <div class="search-bar">
+                        <i class="ph ph-magnifying-glass"></i>
+                        <input
+                            type="text"
+                            id="version-search"
+                            placeholder="Search versions..."
+                            autocomplete="off"
+                            aria-label="Search versions"
+                        />
+                    </div>
+                    <div class="filter-chips">
+                        <button class="filter-chip active" data-filter="all">All</button>
+                        <button class="filter-chip" data-filter="latest">Latest</button>
+                        <button class="filter-chip" data-filter="beta">Beta</button>
+                        <button class="filter-chip" data-filter="stable">Stable</button>
+                    </div>
+                </div>
+
+                <!-- Version List -->
+                <div class="glass-panel version-list-container">
+                    <div class="list-header-bar">
+                        <span class="list-header-text" id="version-count">Loading versions...</span>
+                    </div>
+                    <div id="version-list" class="version-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Selected Version Details -->
+                <div class="glass-panel detail-panel" id="version-details-panel" style="display: none;">
+                    <h3 class="panel-title">
+                        <i class="ph ph-package"></i>
+                        Selected Version
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Label</span>
+                            <span class="info-value" id="detail-label">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Version</span>
+                            <span class="info-value" id="detail-version">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Risk</span>
+                            <span class="info-value" id="detail-risk">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Type</span>
+                            <span class="info-value" id="detail-type">-</span>
+                        </div>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="btn-primary" id="btn-download" disabled>
+                            <i class="ph ph-download-simple"></i>
+                            Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE: LOCK -->
+            <div id="page-lock" class="page">
+                <div class="page-header">
+                    <h1>Lock</h1>
+                    <p class="page-subtitle">Prevent auto-updating</p>
+                </div>
+
+                <div class="glass-panel status-card-main" id="lock-card">
+                    <div class="status-icon-wrapper" id="lock-icon-wrapper">
+                        <i class="ph ph-circle-notch spin" id="lock-icon-main"></i>
+                    </div>
+                    <div class="status-content">
+                        <span class="status-title" id="lock-status">Checking...</span>
+                        <span class="status-subtitle" id="lock-detail">Scanning lock state</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel detail-panel">
+                    <h3 class="panel-title">
+                        <i class="ph ph-info"></i>
+                        Lock Details
+                    </h3>
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <span class="info-label">Locked Version</span>
+                            <span class="info-value" id="lock-version">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Method</span>
+                            <span class="info-value">Hosts file blocking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button id="lock-toggle-btn" class="btn-primary" onclick="toggleLock()">
+                        <i class="ph ph-lock"></i>
+                        Lock
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAGE: CRACK -->
+            <div id="page-crack" class="page">
+                <div class="page-header">
+                    <h1>Activate</h1>
+                    <p class="page-subtitle">Patch VECreator.dll to unlock premium features</p>
+                </div>
+
+                <div class="glass-panel status-card-main">
+                    <div class="status-icon-wrapper" id="crack-icon-wrapper">
+                        <i class="ph ph-circle-notch spin" id="crack-icon-main"></i>
+                    </div>
+                    <div class="status-content">
+                        <span class="status-title" id="crack-vip-status">Checking...</span>
+                        <span class="status-subtitle" id="crack-mode"></span>
+                    </div>
+                </div>
+
+                <div class="glass-panel detail-panel">
+                    <h3 class="panel-title">
+                        <i class="ph ph-warning"></i>
+                        Important
+                    </h3>
+                    <p class="detail-text">
+                        This will patch <code>VECreator.dll</code> to unlock premium features.
+                        A backup is created automatically. You may need to restart the application after patching.
+                    </p>
+                </div>
+
+                <div class="quick-actions">
+                    <button id="crack-toggle-btn" class="btn-primary" onclick="toggleCrack()">
+                        <i class="ph ph-magic-wand"></i>
+                        Apply Patch
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAGE: CLEANUP -->
+            <div id="page-cleanup" class="page">
+                <div class="page-header">
+                    <h1>Cleanup</h1>
+                    <p class="page-subtitle">Remove residual files</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="glass-panel dashboard-info-card">
+                        <div class="card-icon bg-accent-orange">
+                            <i class="ph ph-magnifying-glass"></i>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-label">Files Found</span>
+                            <span class="card-value" id="cleanup-files-found">0</span>
+                        </div>
+                    </div>
+                    <div class="glass-panel dashboard-info-card">
+                        <div class="card-icon bg-accent-green">
+                            <i class="ph ph-check-circle"></i>
+                        </div>
+                        <div class="card-info">
+                            <span class="card-label">Files Cleaned</span>
+                            <span class="card-value" id="cleanup-files-cleaned">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel detail-panel">
+                    <h3 class="panel-title">
+                        <i class="ph ph-folder-open"></i>
+                        Residual Paths
+                    </h3>
+                    <ul id="cleanup-paths" class="cleanup-path-list">
+                        <li class="cleanup-path-item empty">Loading...</li>
+                    </ul>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="btn-danger" onclick="runCleanup()">
+                        <i class="ph ph-broom"></i>
+                        Run Cleanup
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAGE: DEBUG -->
+            <div id="page-debug" class="page">
+                <div class="page-header">
+                    <h1>Debug</h1>
+                    <p class="page-subtitle">Environment and system diagnostics</p>
+                </div>
+
+                <div class="glass-panel detail-panel">
+                    <h3 class="panel-title">
+                        <i class="ph ph-bug"></i>
+                        Debug Log
+                    </h3>
+                    <div class="debug-log" id="debug-log">
+                        <div class="debug-loading">
+                            <i class="ph ph-circle-notch spin"></i>
+                            <span>Loading debug info...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="btn-secondary" onclick="loadDebugInfo()">
+                        <i class="ph ph-arrow-clockwise"></i>
+                        Refresh
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- MODAL: Confirmation Dialog -->
+    <div id="modal-overlay" class="modal-overlay" style="display: none;">
+        <div class="modal-container glass-panel">
+            <div class="modal-icon" id="modal-icon">
+                <i class="ph ph-warning-circle"></i>
+            </div>
+            <h3 class="modal-title" id="modal-title">Are you sure?</h3>
+            <p class="modal-message" id="modal-message">This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="modal-cancel">Cancel</button>
+                <button class="btn-primary" id="modal-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
