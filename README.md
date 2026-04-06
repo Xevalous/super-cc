@@ -86,7 +86,7 @@ super-cc/
 │   │   ├── cleaner.go      # Residual file cleanup
 │   │   └── debug.go        # Environment diagnostics
 │   └── config/
-│       └── config.go       # Config file management (~/.super-cc/config.json)
+│       └── config.go       # Config file management (~/.config/super-cc/config.json)
 ├── frontend/
 │   ├── index.html          # App layout
 │   ├── styles.css          # macOS 26 Tahoe design system
@@ -105,7 +105,7 @@ super-cc/
 
 ## Configuration
 
-App config is stored at `~/.super-cc/config.json`:
+App config is stored at `~/.config/super-cc/config.json`:
 
 ```json
 {

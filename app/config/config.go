@@ -22,11 +22,16 @@ var DefaultConfig = AppConfig{
 }
 
 func GetConfigDir() string {
-	home, err := os.UserHomeDir()
-	if err != nil || home == "" {
-		home = os.TempDir()
+	configDir, err := os.UserConfigDir()
+	if err != nil || configDir == "" {
+		home, err := os.UserHomeDir()
+		if err != nil || home == "" {
+			home = os.TempDir()
+		}
+		// Fallback to ~/.config if UserConfigDir fails
+		configDir = filepath.Join(home, ".config")
 	}
-	return filepath.Join(home, ".super-cc")
+	return filepath.Join(configDir, "super-cc")
 }
 
 func GetConfigPath() string {
